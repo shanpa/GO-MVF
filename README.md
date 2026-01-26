@@ -1,6 +1,7 @@
 
 # GO-MVF
 The official implementation of "A Graph-Optimised Framework for Calibration-Free Multi-View Fusion in Occluded Scenes".
+This paper is currently under submission to The Visual Computer.
 
 ## Abstract
 Multi-view pedestrian detection is crucial for robust scene understanding in applications like surveillance and autonomous driving. 
