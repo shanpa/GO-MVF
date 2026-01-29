@@ -116,7 +116,7 @@ train_mvf_CSRD.py # train code for CSRD
 2. Prepare the **models**  [(Baidu Netdisk)](https://pan.baidu.com/s/1ahLSoqlHyfKlmoOu2SF8vQ?pwd=qhu3) [(Huggingface)](https://huggingface.co/shanpa/GO-MVF/tree/main)and place it to `./models` as the project structure mentioned above.
 
 This CSRD-O dataset release contains only a subset of CSRD-O, provided solely for testing the method presented in our paper.
-The full CSRD-O dataset and train code on CSRD-O will be publicly released upon acceptance of our paper.
+The full CSRD-O dataset and train code on CSRD-O will be publicly released upon publication of our paper.
 
 ### Test
 ```shell
