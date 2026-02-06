@@ -112,11 +112,11 @@ train_mvf_CSRD.py # train code for CSRD
 ## Getting Started
 ### Prepare Dataset and Models
 
-1. Prepare the dataset **CSRD-O** [(Baidu Netdisk)](https://pan.baidu.com/s/1l9vIiWI69zPlmTwJUEVu8w?pwd=yc68) [(Huggingface)](https://huggingface.co/datasets/shanpa/CSRD-O/tree/main) or **CSRD** [(BEVSee)](https://github.com/zekunqian/bevsee) and place it to `./data` as the project structure mentioned above. 
+1. Prepare the dataset **CSRD-O** [(Baidu Netdisk)](https://pan.baidu.com/s/1l9vIiWI69zPlmTwJUEVu8w?pwd=yc68) [(Huggingface)](https://huggingface.co/datasets/shanpa/CSRD-O/tree/main) or **CSRD-OR**[(Baidu Netdisk)]() [(Huggingface)]() or **CSRD** [(BEVSee)](https://github.com/zekunqian/bevsee) and place it to `./data` as the project structure mentioned above. 
 2. Prepare the **models**  [(Baidu Netdisk)](https://pan.baidu.com/s/1ahLSoqlHyfKlmoOu2SF8vQ?pwd=qhu3) [(Huggingface)](https://huggingface.co/shanpa/GO-MVF/tree/main)and place it to `./models` as the project structure mentioned above.
 
-This CSRD-O dataset release contains only a subset of CSRD-O, provided solely for testing the method presented in our paper.
-The full CSRD-O dataset and train code on CSRD-O will be publicly released upon publication of our paper.
+The CSRD-O and CSRD-OR dataset release contains only subset, provided solely for testing the method presented in our paper.
+The full dataset and training code will be made available upon request to the authors after the paper is accepted.
 
 ### Test
 ```shell
