@@ -3,21 +3,7 @@
 The official implementation of "A Graph-Optimised Framework for Calibration-Free Multi-View Fusion in Occluded Scenes".
 
 ## Abstract
-Multi-view pedestrian detection is crucial for robust scene understanding in applications like surveillance and autonomous driving. 
-However, prevailing methods typically depend on precisely pre-calibrated cameras and assume high visual overlap between views, 
-causing performance to degrade under occlusions or limited co-visibility. To overcome these constraints, we introduce an end-to-end, 
-calibration-free framework for the joint registration of cameras and subjects. Our approach begins with a single-view module 
-that estimates pedestrian poses and appearance features within each camera's local coordinate system. 
-Subsequently, a novel Graph-based Pose Propagation Module (GPPM) treats cameras as nodes in a graph, connecting them with 
-edges when they share co-visible pedestrians identified via appearance matching. A Breadth-First Search (BFS) algorithm then 
-finds the shortest registration path from any camera to a designated root camera, enabling pose propagation via local co-visibility 
-links and global alignment of all subjects into a unified Bird's-Eye-View (BEV) space. This strategy relaxes the stringent 
-requirement of full co-visibility with the root node. A multi-task loss function jointly optimises pose estimation and 
-feature matching. Trained and evaluated on a synthetic five-view dataset with occlusions (CSRD-O), our framework achieves 
-mean camera pose errors of 1.57 m / 8.70° and mean pedestrian pose errors of 1.40 m / 9.14°. Experiments demonstrate 
-the method's robustness in generating accurate BEV pedestrian distributions even under heavy occlusion and low inter-view 
-overlap. This work presents a practical, purely vision-based solution for dynamic multi-camera systems, advancing 
-the state of calibration-free multi-view fusion.
+Multi-view pedestrian detection is crucial for unmanned system in applications like scene understanding and crowd surveillance. However, prevailing methods typically rely on precisely pre-calibrated cameras and assume high visual overlap between views. This causes performance degradation under occlusions and restricts deploy-ment in unmanned swarm system, which often require dynamic and flexible configu-rations. To overcome these constraints, we introduce an end-to-end, calibration-free framework for the joint registration of cameras and subjects. Our approach begins with a single-view module that estimates subjects poses and appearance features. Subse-quently, a novel Graph-based Pose Propagation Module (GPPM) treats cameras as nodes in a graph, connecting them with edges when they share co-visible subjects identified via appearance matching. Breadth-First Search (BFS) then finds the shortest registration path from any camera to a designated root camera, enabling pose propa-gation via local co-visibility links and global alignment of all subjects into a unified Bird's-Eye-View (BEV) space. This strategy relaxes the stringent requirement of full co-visibility with the root node. A multi-task loss function is proposed to jointly opti-mize pose estimation and feature matching. Trained and evaluated on a synthetic da-taset with occlusions (CSRD-O) collected by Unmanned Ground Vehicle (UGV) swarm system, our framework achieves mean camera pose errors of 1.57 m / 8.70° and mean subject pose errors of 1.40 m / 9.14°. Furthermore, we constructed a dataset (CSRD-OR) in a real-world to validate the feasibility of our algorithm. Experiments demonstrate the method's robustness in generating accurate BEV even under heavy occlusion and low inter-view overlap. This work proposes a purely visual self-calibrated multi-view fusion perception scheme, providing a possible collaborative perception approach for flexible deployment in unmanned swarm systems.
 <figure>
   <img src="figures/Fig1.svg" alt="question image" style="max-width: 100%;">
 </figure>
@@ -76,6 +62,26 @@ train_mvf_CSRD.py # train code for CSRD
             ├── hor3_video
             ├── hor4_video
             ├── hor5_video
+    ├── CSRD_OR
+        ├── log
+        ├── annotation
+            ├── person1.txt # 3d gt of subjects
+            ├── ...
+            ├── person5.txt
+            ├── camera1.txt # 3d gt of cameras
+            ├── ...
+            ├── camera5.txt
+            ├── fp.pth # f_pid_dict[f"{frame_id}_{p_id}"] = [x, y, r]
+            ├── fps.pth # f_pids_dict[int(frame_id)][int(p_id)] = [x, y, r]
+            ├── fv.pth # fv_dict[f"{frame}_{view_id}"].append([pid, bbox])
+            ├── fv_sk_box.pth # fv_sk_box[f"{frame_id}_{view_id}"] = [keypoints, boxes]
+            ├── f_top_bbox_pid.pth # not use
+        ├── original_img_backup # images of the dataset
+            ├── hor1_video 
+            ├── hor2_video
+            ├── hor3_video
+            ├── hor4_video
+            ├── hor5_video
     ├── CSRD
         ├── virtual
             ├── log
@@ -115,7 +121,7 @@ train_mvf_CSRD.py # train code for CSRD
 2. Prepare the **models**  [(Baidu Netdisk)](https://pan.baidu.com/s/1ahLSoqlHyfKlmoOu2SF8vQ?pwd=qhu3) [(Huggingface)](https://huggingface.co/shanpa/GO-MVF/tree/main)and place it to `./models` as the project structure mentioned above.
 
 The CSRD-O and CSRD-OR dataset release contains only subset, provided solely for testing the method presented in our paper.
-The full dataset and training code will be made available upon request to the authors after the paper is accepted.
+The full dataset and training code will be made available upon request to the authors (jingjiaqi@buaa.edu.cn) after the paper is accepted.
 
 ### Test
 ```shell
