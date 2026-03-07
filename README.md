@@ -1,27 +1,9 @@
 
 # GO-MVF
-The official implementation of "A Graph-Optimised Framework for Calibration-Free Multi-View Fusion in Occluded Scenes".
+The official implementation of "UGV Swarm Multi-View Fusion under Occlusion: A Graph-based Calibration-Free Framework".
 
 ## Abstract
-Multi-view pedestrian detection is crucial for robust scene understanding in applications like surveillance and autonomous driving. 
-However, prevailing methods typically depend on precisely pre-calibrated cameras and assume high visual overlap between views, 
-causing performance to degrade under occlusions or limited co-visibility. To overcome these constraints, we introduce an end-to-end, 
-calibration-free framework for the joint registration of cameras and subjects. Our approach begins with a single-view module 
-that estimates pedestrian poses and appearance features within each camera's local coordinate system. 
-Subsequently, a novel Graph-based Pose Propagation Module (GPPM) treats cameras as nodes in a graph, connecting them with 
-edges when they share co-visible pedestrians identified via appearance matching. A Breadth-First Search (BFS) algorithm then 
-finds the shortest registration path from any camera to a designated root camera, enabling pose propagation via local co-visibility 
-links and global alignment of all subjects into a unified Bird's-Eye-View (BEV) space. This strategy relaxes the stringent 
-requirement of full co-visibility with the root node. A multi-task loss function jointly optimises pose estimation and 
-feature matching. Trained and evaluated on a synthetic five-view dataset with occlusions (CSRD-O), our framework achieves 
-mean camera pose errors of 1.57 m / 8.70° and mean pedestrian pose errors of 1.40 m / 9.14°. Experiments demonstrate 
-the method's robustness in generating accurate BEV pedestrian distributions even under heavy occlusion and low inter-view 
-overlap. This work presents a practical, purely vision-based solution for dynamic multi-camera systems, advancing 
-the state of calibration-free multi-view fusion.
-<figure>
-  <img src="figures/Fig1.svg" alt="question image" style="max-width: 100%;">
-</figure>
-
+In Unmanned Ground Vehicle (UGV) swarm systems, comprehensive environmental awareness is critical for coordinated operations. Yet they are frequently deployed in occlusion-rich, constrained environments where multi-agent visual fusion is essential. However, existing methods are critically limited by offline-calibrated extrinsic param-eters, hindering flexible deployment, and by a strong co-visibility assumption, which fails under severe occlusion. To overcome these constraints, we introduced an end-to-end, calibration-free framework for the joint registration of cameras and sub-jects. Our approach begins with a single-view module that estimates subjects poses and appearance features. Subsequently, a novel Graph-based Pose Propagation Module (GPPM) treats UGVs’ cameras as nodes in a graph, connecting them with edges when they share co-visible subjects identified via appearance matching. Breadth-First Search (BFS) then finds the shortest registration path from any camera to a designated root camera, enabling pose propagation via local co-visibility links and global alignment of all subjects into a unified Bird's-Eye-View (BEV) space. This strategy relaxes the strin-gent requirement of full co-visibility with the root node. A multi-task loss function is proposed to jointly optimize pose estimation and feature matching. Trained and eval-uated on a synthetic dataset with occlusions (CSRD-O) collected by UGV swarm sys-tem, our framework achieves mean camera pose errors of 1.57 m / 8.70° and mean subject pose errors of 1.40 m / 9.14°. Furthermore, we demonstrated a scene monitoring task using UGV swarm system. Experiments show that the proposed method generates accurate BEV estimates even under severe occlusion and low inter-view overlap. This work presents a purely visual, self-calibrating multi-view fusion perception scheme, demonstrating its potential to support cooperative perception, task-oriented monitor-ing, and collective situational awareness in UGV swarm systems.
 
 
 ## Installation
@@ -76,6 +58,25 @@ train_mvf_CSRD.py # train code for CSRD
             ├── hor3_video
             ├── hor4_video
             ├── hor5_video
+    ├── CSRD_OR
+        ├── log
+        ├── annotation
+            ├── person1.txt # 3d gt of subjects
+            ├── ...
+            ├── person6.txt
+            ├── camera1.txt # 3d gt of cameras
+            ├── ...
+            ├── camera4.txt
+            ├── fp.pth # f_pid_dict[f"{frame_id}_{p_id}"] = [x, y, r]
+            ├── fps.pth # f_pids_dict[int(frame_id)][int(p_id)] = [x, y, r]
+            ├── fv.pth # fv_dict[f"{frame}_{view_id}"].append([pid, bbox])
+            ├── fv_sk_box.pth # fv_sk_box[f"{frame_id}_{view_id}"] = [keypoints, boxes]
+            ├── f_top_bbox_pid.pth # not use
+        ├── original_img_backup # images of the dataset
+            ├── hor1_video 
+            ├── hor2_video
+            ├── hor3_video
+            ├── hor4_video
     ├── CSRD
         ├── virtual
             ├── log
@@ -111,11 +112,11 @@ train_mvf_CSRD.py # train code for CSRD
 ## Getting Started
 ### Prepare Dataset and Models
 
-1. Prepare the dataset **CSRD-O** [(Baidu Netdisk)](https://pan.baidu.com/s/1l9vIiWI69zPlmTwJUEVu8w?pwd=yc68) [(Huggingface)](https://huggingface.co/datasets/shanpa/CSRD-O/tree/main) or **CSRD** [(BEVSee)](https://github.com/zekunqian/bevsee) and place it to `./data` as the project structure mentioned above. 
+1. Prepare the dataset **CSRD-O** [(Baidu Netdisk)](https://pan.baidu.com/s/1l9vIiWI69zPlmTwJUEVu8w?pwd=yc68) [(Huggingface)](https://huggingface.co/datasets/shanpa/CSRD-O/tree/main) or **CSRD-OR** or **CSRD** [(BEVSee)](https://github.com/zekunqian/bevsee) and place it to `./data` as the project structure mentioned above. 
 2. Prepare the **models**  [(Baidu Netdisk)](https://pan.baidu.com/s/1ahLSoqlHyfKlmoOu2SF8vQ?pwd=qhu3) [(Huggingface)](https://huggingface.co/shanpa/GO-MVF/tree/main)and place it to `./models` as the project structure mentioned above.
 
 This CSRD-O dataset release contains only a subset of CSRD-O, provided solely for testing the method presented in our paper.
-The full CSRD-O dataset and train code on CSRD-O will be publicly released upon acceptance of our paper.
+The full CSRD-O and CSRD-OR datasets and the training code will be available upon request after the acceptance of our paper. Please contact us at: jingjiaqi@buaa.edu.cn.
 
 ### Test
 ```shell
