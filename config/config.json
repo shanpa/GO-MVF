@@ -1,0 +1,40 @@
+{
+  "Datasets": {
+    "CSRD_Virtual": {
+      "root_view": "data/CSRD/virtual/original_img_backup/hor1_video",
+      "comp_view_list": [
+        "data/CSRD/virtual/original_img_backup/hor2_video",
+        "data/CSRD/virtual/original_img_backup/hor3_video",
+        "data/CSRD/virtual/original_img_backup/hor4_video",
+        "data/CSRD/virtual/original_img_backup/hor5_video"
+      ],
+      "label": "data/CSRD/virtual/annotation",
+      "output": "data/CSRD/virtual/log",
+      "annotation": "data/CSRD/virtual/annotation",
+      "view": 5,
+      "struct": {
+        "images": "",
+        "labels": "",
+        "features": ""
+      }
+    },
+    "CSRD_O": {
+      "root_view": "data/CSRD_O/original_img_backup/hor1_video",
+      "comp_view_list": [
+        "data/CSRD_O/original_img_backup/hor2_video",
+        "data/CSRD_O/original_img_backup/hor3_video",
+        "data/CSRD_O/original_img_backup/hor4_video",
+        "data/CSRD_O/original_img_backup/hor5_video"
+      ],
+      "label": "data/CSRD_O/annotation",
+      "output": "data/CSRD_O/log",
+      "annotation": "data/CSRD_O/annotation",
+      "view": 5,
+      "struct": {
+        "images": "",
+        "labels": "",
+        "features": ""
+      }
+    }
+  }
+}
